@@ -5,6 +5,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 
 const db = mysql.createPool({
+	multipleStatements: true,
 	host: 'localhost',
 	user: 'root',
 	password: 'password',
@@ -156,9 +157,49 @@ app.post('/upload', (req, res) => {
 	});
 });
 
+app.post('/register', (req, res) => {
+	const name = req.body.name;
+	const email = req.body.email;
+	const location = req.body.location;
+	const current_job = req.body.current_job;
+	const experience = req.body.experience;
+	const edu = req.body.edu;
+	const pass_year = req.body.pass_year;
+	const skills = req.body.skills;
+	const bio = req.body.bio;
+	const image = req.body.image;
+
+	// const sqlInsert =
+	// 	'INSERT INTO alumni (email,alumni_name,current_job,experiences,education,skills,bio,profile_link,passout_year,location ) VALUES (?,?,?,?,?,?,?,?,?,?);';
+	db.query(
+		'INSERT INTO alumni (email,alumni_name,current_job,experiences,education,skills,bio,profile_link,passout_year,location ) VALUES (?,?,?,?,?,?,?,?,?,?);',
+		[
+			email,
+			name,
+			current_job,
+			experience,
+			edu,
+			skills,
+			bio,
+			image,
+			pass_year,
+			location,
+		],
+		(err, result) => {
+			if (err) {
+				res.send({ err: err });
+			} else {
+				res.send(result);
+			}
+		}
+	);
+});
+
 app.get('/feed', (req, res) => {
-	const sqlQuery = 'SELECT * FROM post;';
-	db.query(sqlQuery, (err, result) => {
+	// const email = req.body.email;
+	// console.log(req.body.email);
+
+	db.query('SELECT * FROM post;', (err, result) => {
 		if (err) {
 			res.send({ err: err });
 		}
@@ -166,6 +207,21 @@ app.get('/feed', (req, res) => {
 			res.send(result);
 		} else {
 			res.send({ message: 'No post to show' });
+		}
+	});
+});
+
+app.get('/profile/byId/:id', (req, res) => {
+	const id = req.params.id;
+	const sqlQuery = 'SELECT * FROM alumni WHERE alumni_id=?';
+	db.query(sqlQuery, [id], (err, result) => {
+		if (err) {
+			res.send({ err: err });
+		}
+		if (result.length > 0) {
+			res.send(result);
+		} else {
+			res.send({ message: 'No result found' });
 		}
 	});
 });

@@ -2,19 +2,22 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Row, Col, Modal, Button } from 'react-bootstrap';
+import { Card, Row, Col, Modal, Button, Alert } from 'react-bootstrap';
 import EventIcon from '@material-ui/icons/Event';
 import EventForm from './EventForm';
 
 const Events = () => {
 	const [addEvent, setAddEvent] = useState(false);
 	const [events, setEvents] = useState([]);
+	const [errorMessage, setErrorMessage] = useState('');
 	const handleShow = () => setAddEvent(true);
 	const handleClose = () => setAddEvent(false);
 
 	useEffect(() => {
 		axios.get('http://localhost:3001/event').then((response) => {
-			setEvents(response.data);
+			if (response.data.message) {
+				setErrorMessage(response.data.message);
+			} else setEvents(response.data);
 		});
 	}, []);
 
@@ -55,6 +58,7 @@ const Events = () => {
 					</Button>
 				</Card.Header>
 				<Card.Body>
+					{errorMessage ? <Alert variant='danger'>{errorMessage}</Alert> : null}
 					{events.map((value, key) => {
 						return (
 							<>
@@ -146,7 +150,7 @@ const Events = () => {
 					show={addEvent}
 					onHide={handleClose}
 					style={{
-						width: '997px',
+						width: '70rem',
 						height: '800px',
 						display: 'flex',
 						justifyContent: 'center',

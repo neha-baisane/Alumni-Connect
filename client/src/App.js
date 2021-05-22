@@ -1,14 +1,15 @@
 import './App.css';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PostCard from './Components/Homepage/PostCard';
 import NavBar from './Components/Homepage/NavBar';
 import SideCol from './Components/Homepage/SideCol';
 import Events from './Components/Homepage/Events';
+import ProfilePage from './Components/Homepage/ProfilePage';
 import Notablealumni from './Components/Homepage/Notablealumni';
 import LoginContainer from './Components/Loginpage/LoginContainer';
 import Gallery from './Components/Homepage/Gallery';
 import { Container, Col, Row } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
 			? history.push('/feed')
 			: history.push('/');
 	}
-	// window.addEventListener('onunload', () => localStorage.clear());
 
 	return (
 		<div className='App'>
@@ -33,9 +33,12 @@ function App() {
 							<Col>
 								<Switch>
 									<Route path='/feed' component={PostCard} />
-									<Route path='/events' component={Events} />
+									<Route path='/events' component={Events}></Route>
+									<Route path='/profile/:id' exact component={ProfilePage} />
 									<Route path='/featured' component={Notablealumni} />
+
 									<Route path='/gallery' component={Gallery} />
+									{/* <Route path='/profile' component={ProfilePage} /> */}
 								</Switch>
 							</Col>
 						</Row>

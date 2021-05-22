@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, InputGroup, FormControl } from 'react-bootstrap';
+import { Card, Button, InputGroup, FormControl, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Avatar from '@material-ui/core/Avatar';
 import AddCommentIcon from '@material-ui/icons/AddComment';
@@ -7,57 +7,37 @@ import BoxPost from './BoxPost';
 import { Image } from 'cloudinary-react';
 import axios from 'axios';
 
-// class PostCard extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			showComment: false,
-// 		};
-
-// 		this.setShowComment = this.setShowComment.bind(this);
-// 		this.postComment = this.postComment.bind(this);
-// 	}
-
-// 	setShowComment() {
-// 		let currentShowComment = this.state.showComment;
-// 		this.setState({
-// 			showComment: !currentShowComment,
-// 		});
-// 	}
-
-// 	postComment() {}
-// 	render() {
-// 		return (
-
-// 		);
-// 	}
-// }
-
-// export default PostCard;
-
 function PostCard() {
 	const [showComment, setShowComment] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	const [uploads, setUploads] = useState([]);
+	const email = localStorage.getItem('email');
 
 	useEffect(() => {
 		axios.get('http://localhost:3001/feed').then((response) => {
-			setUploads(response.data);
+			if (response.data.message) {
+				setErrorMessage(response.data.message);
+			} else setUploads(response.data);
 		});
 	}, []);
 
 	return (
 		<>
 			<BoxPost />
+			{errorMessage ? <Alert variant='danger'>{errorMessage}</Alert> : null}
 			{uploads.map((value, key) => {
 				return (
-					<div key={value.post_id}>
-						<Card border='light' style={{ width: '38rem', marginLeft: '10%' }}>
+					<div>
+						<Card
+							border='light'
+							style={{ width: '38rem', marginLeft: '10%' }}
+							key={value.post_id}>
 							<Card.Header style={{ display: 'flex', flexDirection: 'row' }}>
-								<Avatar
+								{/* <Avatar
 									alt={value.user_name}
 									style={{ marginRight: '8px' }}
 									src='/static/images/avatar/1.jpg'
-								/>
+								/> */}
 								<Card.Title style={{ marginTop: '8px' }}>
 									{value.user_name}
 								</Card.Title>

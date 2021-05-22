@@ -2,32 +2,29 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
-import {
-	Card,
-	CardColumns,
-	CardGroup,
-	Row,
-	Col,
-	CardDeck,
-} from 'react-bootstrap';
+import { Card, Row, Col, CardDeck, Alert } from 'react-bootstrap';
 import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone';
+import { Image } from 'cloudinary-react';
+import { useHistory } from 'react-router-dom';
 
 const Notablealumni = () => {
+	const [errorMessage, setErrorMessage] = useState('');
 	const [featured, setFeatured] = useState([]);
 	useEffect(() => {
 		Axios.get('http://localhost:3001/featured').then((response) => {
-			setFeatured(response.data);
-			console.log(response.data);
+			if (response.data.message) {
+				setErrorMessage(response.data.message);
+			} else setFeatured(response.data);
 		});
 	}, []);
-
+	const history = useHistory();
 	return (
 		<>
 			<Card
 				style={{
 					height: 'auto ',
 					marginLeft: '180px ',
-					width: 'auto',
+					width: '27rem',
 					borderColor: '#202020',
 				}}>
 				<Card.Header
@@ -43,9 +40,16 @@ const Notablealumni = () => {
 					/>
 					<b>Featured Alumni</b>
 				</Card.Header>
+				<Card.Body>
+					{errorMessage ? <Alert variant='danger'>{errorMessage}</Alert> : null}
+				</Card.Body>
+
 				{featured.map((value, key) => {
 					return (
 						<CardDeck
+							onClick={() => {
+								history.push(`/profile/${value.alumni_id}`);
+							}}
 							key={value.alumni_id}
 							style={{
 								marginTop: '20px',
@@ -55,7 +59,7 @@ const Notablealumni = () => {
 							<Card style={{ width: '20rem', borderColor: '#202020' }}>
 								<Row style={{ borderRadius: '50%' }}>
 									<Col>
-										<img
+										{/* <img
 											src={value.profile_link}
 											style={{
 												borderRadius: '50%',
@@ -63,6 +67,16 @@ const Notablealumni = () => {
 												height: '100px',
 												margin: '14px',
 											}}
+										/> */}
+										<Image
+											style={{
+												borderRadius: '50%',
+												width: '100px',
+												height: '100px',
+												margin: '25px',
+											}}
+											cloudName='sakshi-mini-project'
+											publicId={value.profile_link}
 										/>
 									</Col>
 									<Col>
