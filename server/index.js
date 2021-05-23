@@ -225,3 +225,42 @@ app.get('/profile/byId/:id', (req, res) => {
 		}
 	});
 });
+
+app.post('/comment', (req, res) => {
+	const postId = req.body.postId;
+	const email = req.body.email;
+	const text = req.body.text;
+
+	const sqlInsert =
+		'INSERT INTO comments (post_id, email, text) VALUES (?,?,?);';
+	db.query(sqlInsert, [postId, email, text], (err, result) => {
+		if (err) {
+			res.send({ err: err });
+		} else {
+			res.send(result);
+		}
+	});
+});
+app.get('/comment', (req, res) => {
+	const sqlQuery = 'SELECT * FROM comments';
+	db.query(sqlQuery, (err, result) => {
+		if (err) {
+			res.send({ err: err });
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+// app.get('/comment/:postId', (req, res) => {
+// 	const postId = req.params.postId;
+
+// 	const sqlQuery = 'SELECT * FROM comments WHERE post_id=?';
+// 	db.query(sqlQuery, [postId], (err, result) => {
+// 		if (err) {
+// 			res.send({ err: err });
+// 		} else {
+// 			res.send(result);
+// 		}
+// 	});
+// });

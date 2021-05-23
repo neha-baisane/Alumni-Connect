@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel, Card, Col, Alert } from 'react-bootstrap';
+import { Carousel, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BoxGallery from './BoxGallery';

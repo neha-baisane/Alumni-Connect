@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
 import {
 	Navbar,
 	Button,
@@ -8,7 +8,7 @@ import {
 	Tooltip,
 	OverlayTrigger,
 } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RegisterProfile from './RegisterProfile';
 
@@ -21,7 +21,7 @@ const NavBar = () => {
 		window.location.replace('/');
 	};
 
-	let history = useHistory();
+	//let history = useHistory();
 	return (
 		<Navbar
 			bg='dark'

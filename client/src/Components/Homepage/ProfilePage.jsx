@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-	Card,
-	Button,
-	Row,
-	Col,
-	Container,
-	Tab,
-	Sonnet,
-	Alert,
-} from 'react-bootstrap';
-import Tabs from 'react-bootstrap/Tabs';
+import { Card, Row, Col, Container, Alert } from 'react-bootstrap';
 import { Image } from 'cloudinary-react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';

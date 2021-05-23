@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios';
-import {
-	Form,
-	Button,
-	Card,
-	Col,
-	handleChange,
-	errors,
-	Row,
-	CardColumns,
-} from 'react-bootstrap';
+import { Form, Button, Card, Col, Row } from 'react-bootstrap';
 import EventIcon from '@material-ui/icons/Event';
 
 const EventForm = () => {
@@ -59,6 +50,7 @@ const EventForm = () => {
 							<img
 								src='https://image.freepik.com/free-vector/appointment-booking-with-calendar-person_23-2148576382.jpg'
 								style={{ height: '200px', width: '200px', marginLeft: '90px' }}
+								alt=''
 							/>
 						</Col>
 						<Col Style={{ marginLeft: '2px', height: '20rem', width: '50rem' }}>

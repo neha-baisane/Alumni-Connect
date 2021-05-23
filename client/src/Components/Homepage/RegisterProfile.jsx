@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { Form, Button, Card, Col, handleChange, errors } from 'react-bootstrap';
+import { Form, Button, Card, Col } from 'react-bootstrap';
 import PersonIcon from '@material-ui/icons/Person';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 const RegisterProfile = () => {
 	const [name, setName] = useState('');
@@ -16,7 +16,7 @@ const RegisterProfile = () => {
 	const [skills, setSkills] = useState('');
 	const [bio, setBio] = useState('');
 	const [image, setImage] = useState([]);
-	let history = useHistory();
+	//let history = useHistory();
 	const register = () => {
 		const formData = new FormData();
 		formData.append('file', image[0]);

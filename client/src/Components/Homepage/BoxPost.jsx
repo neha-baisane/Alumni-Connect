@@ -19,6 +19,7 @@ const BoxPost = () => {
 				formData
 			)
 			.then((response) => {
+				console.log('cloudinary done');
 				const fileName = response.data.public_id;
 				axios
 					.post('http://localhost:3001/upload', {
@@ -27,7 +28,8 @@ const BoxPost = () => {
 						author: localStorage.getItem('email'),
 					})
 					.then((response) => {
-						history.push('/feed');
+						console.log('cloudinary done');
+						history.push('/events');
 					});
 			});
 	};

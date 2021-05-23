@@ -72,7 +72,6 @@ const Events = () => {
 										alignItems: 'left',
 										marginTop: 'auto',
 										backgroundColor: '',
-										alignItems: 'left',
 									}}>
 									<Row>
 										<Col sm={4}>
