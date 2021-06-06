@@ -5,8 +5,12 @@ import NavBar from './Components/Homepage/NavBar';
 import SideCol from './Components/Homepage/SideCol';
 import Events from './Components/Homepage/Events';
 import ProfilePage from './Components/Homepage/ProfilePage';
+import StickyMediaBar from './Components/Homepage/StickyMediaBar';
 import Notablealumni from './Components/Homepage/Notablealumni';
 import LoginContainer from './Components/Loginpage/LoginContainer';
+import SignupContainer from './Components/Loginpage/SignupContainer';
+import Home from './Components/Loginpage/Home';
+import CommentPage from './Components/Homepage/CommentPage';
 import Gallery from './Components/Homepage/Gallery';
 import { Container, Col, Row } from 'react-bootstrap';
 import React from 'react';
@@ -27,26 +31,32 @@ function App() {
 					<NavBar />
 					<Container>
 						<Row>
-							<Col sm={2}>
+							<Col sm={2} style={{ float: 'left' }}>
 								<SideCol />
 							</Col>
 							<Col>
 								<Switch>
+									{' '}
 									<Route path='/feed' component={PostCard} />
 									<Route path='/events' component={Events}></Route>
 									<Route path='/profile/:id' exact component={ProfilePage} />
 									<Route path='/featured' component={Notablealumni} />
-
 									<Route path='/gallery' component={Gallery} />
-									{/* <Route path='/profile' component={ProfilePage} /> */}
+									<Route path='/post/:id' component={CommentPage} />
 								</Switch>
+								{/* <CommentPage /> */}
 							</Col>
 						</Row>
 					</Container>
 				</>
 			) : (
-				<Route path='/' exact component={LoginContainer} />
+				<>
+					<Route path='/' exact component={Home} />
+					<Route path='/login' exact component={LoginContainer} />
+					<Route path='/signup' exact component={SignupContainer} />
+				</>
 			)}
+			<StickyMediaBar />
 		</div>
 	);
 }

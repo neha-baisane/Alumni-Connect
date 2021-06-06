@@ -1,0 +1,25 @@
+.icons {
+	position: fixed;
+
+	top: 30%;
+	right: 0%;
+	display: flex;
+	width: 200px;
+	flex-direction: column;
+}
+.icons a:hover {
+	transform: translate(0px, 0px);
+}
+
+.icons a {
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 10px;
+	font-size: 20px;
+	margin: 2px;
+	text-align: left;
+	border-radius: 50px 0px 0px 50px;
+	transform: translate(142px, 0px);
+	transition: all 0.5s;
+	background-color: #e6e6e6;
+}

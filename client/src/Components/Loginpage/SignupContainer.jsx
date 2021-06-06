@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
-import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import './LoginContainer.css';
 
-class LoginContainer extends Component {
+class SignupContainer extends Component {
 	render() {
 		return (
 			<div>
@@ -14,11 +14,11 @@ class LoginContainer extends Component {
 				<Card className='login_container shadow p-3 mb-5 bg-white rounded'>
 					<Card.Body>
 						<Card.Title className='Card_title'>Alumni Connect</Card.Title>
-						<Card.Subtitle className='mb-2 text-muted '>
+						<Card.Subtitle className='mb-2 text-muted'>
 							A place to share knowledge and better understand the world
 						</Card.Subtitle>{' '}
 						<br></br>
-						<LoginForm />
+						<SignupForm />
 					</Card.Body>
 				</Card>
 			</div>
@@ -26,4 +26,4 @@ class LoginContainer extends Component {
 	}
 }
 
-export default LoginContainer;
+export default SignupContainer;

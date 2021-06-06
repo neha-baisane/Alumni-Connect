@@ -26,7 +26,8 @@ const BoxPost = () => {
 						image: fileName,
 					})
 					.then((response) => {
-						console.log('database done');
+						//console.log('database done');
+						//window.location.reload(true);
 						history.push('/gallery');
 					});
 			});
@@ -35,35 +36,32 @@ const BoxPost = () => {
 		<>
 			<Accordion>
 				<Card
+					className='shadow-sm'
 					style={{
 						display: 'flex',
-						marginLeft: '10%',
-						width: '34rem',
+						marginLeft: '15%',
+						width: '38rem',
 						height: 'auto',
 						cursor: 'pointer',
+						//backgroundColor: '#219EB2',
 					}}>
 					<Card.Header
 						style={{
 							display: 'flex',
 							flexDirection: 'row',
 							width: '100%',
-							backgroundColor: '#f0f3f7',
-							fontSize: '15px',
+
+							fontSize: '18px',
 						}}>
 						<Accordion.Toggle
-							as={Card.Header}
-							variant='link'
+							as={Card.Text}
 							eventKey='0'
-							style={{ height: 'auto', width: '38rem' }}>
-							<PostAddIcon
-								alt='User Name'
-								style={{
-									marginRight: '8px',
-									height: '35px',
-									width: '35px',
-									color: 'black',
-								}}
-							/>
+							style={{ height: 'auto', width: '38rem', color: '#3e4444' }}>
+							<img
+								src='https://img.icons8.com/plasticine/2x/image.png'
+								class='rounded-circle'
+								style={{ height: '2rem', width: '2rem' }}
+							/>{' '}
 							Add Image
 						</Accordion.Toggle>
 					</Card.Header>
@@ -83,7 +81,6 @@ const BoxPost = () => {
 									<Form.Group>
 										<Form.File
 											id='exampleFormControlFile2'
-											label='Example file input'
 											onChange={(event) => {
 												setImage(event.target.files);
 											}}
@@ -91,11 +88,14 @@ const BoxPost = () => {
 									</Form.Group>
 									<Button
 										onClick={upload}
-										variant='dark'
+										variant='success'
+										className='btn-sm'
 										style={{
 											marginLeft: '80px',
 											height: '2rem',
 											width: '4rem',
+											alignItems: 'center',
+											justifyContent: 'center',
 										}}>
 										Post
 									</Button>

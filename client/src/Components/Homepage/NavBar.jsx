@@ -11,11 +11,14 @@ import {
 //import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RegisterProfile from './RegisterProfile';
+import { Link } from 'react-router-dom';
+import logo2 from './logo2.png';
 
 const NavBar = () => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+	const status = localStorage.getItem('status');
 	const handleLogOut = () => {
 		localStorage.clear();
 		window.location.replace('/');
@@ -31,13 +34,27 @@ const NavBar = () => {
 				marginBottom: '20px',
 				display: 'flex',
 				width: '100%',
-			}}>
-			<Navbar.Brand href='#home'>Alumni Connect</Navbar.Brand>
+			}}
+			className='shadow p-3 mb-5'>
+			<Navbar.Brand href='/feed'>
+				{' '}
+				<img
+					src={logo2}
+					alt='loading...'
+					style={{
+						float: 'left',
+						height: '150px',
+						width: '170px',
+						marginTop: '40px',
+					}}
+				/>
+			</Navbar.Brand>
 			<Navbar.Collapse className='justify-content-end'>
 				<Navbar.Text>
 					{localStorage.getItem('email')}{' '}
 					<Button
-						variant='outline-info'
+						className='btn-sm'
+						variant='info'
 						onClick={handleLogOut}
 						style={{
 							marginLeft: '10px',
@@ -46,54 +63,25 @@ const NavBar = () => {
 					</Button>
 				</Navbar.Text>
 			</Navbar.Collapse>
-			<DropdownButton
-				variant='outline-info'
-				title='Complete Profile'
-				style={{ marginLeft: '10px' }}>
-				<Col>
-					<Button
-						onClick={handleShow}
-						variant='light'
-						style={{
-							height: '30px',
-							width: '90px',
-							marginTop: '0px',
-							marginLeft: '25px',
-							backgroundColor: 'white',
-						}}>
-						Alumni
-					</Button>
-					<Modal scrollable={true} size='xl' show={show} onHide={handleClose}>
-						<Modal.Header closeButton></Modal.Header>
-						<Modal.Body>
-							<RegisterProfile />
-						</Modal.Body>
-					</Modal>
-				</Col>
+			{status == 'alumni' && (
+				<Button
+					className='btn-sm'
+					onClick={handleShow}
+					variant='info'
+					style={{
+						marginLeft: '10px',
+					}}>
+					Complete Profile
+				</Button>
+			)}
 
-				<Col>
-					<OverlayTrigger
-						overlay={
-							<Tooltip id='tooltip-disabled'>Students are not allowed!</Tooltip>
-						}>
-						<span className='d-inline-block'>
-							<Button
-								variant='light'
-								disabled
-								style={{
-									pointerEvents: 'none',
-									height: '30px',
-									width: '90px',
-									marginTop: '2px',
-									marginLeft: '25px',
-									backgroundColor: 'white',
-								}}>
-								Student
-							</Button>
-						</span>
-					</OverlayTrigger>
-				</Col>
-			</DropdownButton>
+			<Modal scrollable={true} size='xl' show={show} onHide={handleClose}>
+				<Modal.Header closeButton></Modal.Header>
+
+				<Modal.Body>
+					<RegisterProfile />
+				</Modal.Body>
+			</Modal>
 		</Navbar>
 	);
 };

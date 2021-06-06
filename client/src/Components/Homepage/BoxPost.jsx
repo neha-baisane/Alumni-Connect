@@ -7,7 +7,9 @@ import { useHistory } from 'react-router-dom';
 
 const BoxPost = () => {
 	const [description, setDescription] = useState('');
+
 	const [image, setImage] = useState([]);
+	const localStatus = localStorage.getItem('status');
 	const history = useHistory();
 	const upload = () => {
 		const formData = new FormData();
@@ -19,17 +21,19 @@ const BoxPost = () => {
 				formData
 			)
 			.then((response) => {
-				console.log('cloudinary done');
+				//console.log('cloudinary done');
 				const fileName = response.data.public_id;
 				axios
 					.post('http://localhost:3001/upload', {
 						description: description,
 						image: fileName,
 						author: localStorage.getItem('email'),
+						status: localStatus,
 					})
 					.then((response) => {
-						console.log('cloudinary done');
-						history.push('/events');
+						//console.log('cloudinary done');
+						history.push('/feed');
+						window.location.reload(true);
 					});
 			});
 	};
@@ -37,34 +41,32 @@ const BoxPost = () => {
 		<>
 			<Accordion>
 				<Card
-					border='light'
+					className='shadow-sm'
 					style={{
 						display: 'flex',
-						marginLeft: '10%',
+						marginLeft: '15%',
 						width: '38rem',
 						height: 'auto',
 						cursor: 'pointer',
+						//backgroundColor: '#219EB2',
 					}}>
 					<Card.Header
 						style={{
 							display: 'flex',
 							flexDirection: 'row',
 							width: '100%',
-							fontSize: '20px',
+
+							fontSize: '18px',
 						}}>
 						<Accordion.Toggle
 							as={Card.Text}
 							eventKey='0'
-							style={{ height: 'auto', width: '38rem' }}>
-							<PostAddIcon
-								alt='User Name'
-								style={{
-									marginRight: '8px',
-									height: '25px',
-									width: '45px',
-									color: 'black',
-								}}
-							/>
+							style={{ height: 'auto', width: '38rem', color: '#3e4444' }}>
+							<img
+								src='https://img.icons8.com/clouds/2x/multi-edit.png'
+								class='rounded-circle'
+								style={{ height: '2rem', width: '2rem' }}
+							/>{' '}
 							Start a Post
 						</Accordion.Toggle>
 					</Card.Header>
@@ -75,46 +77,24 @@ const BoxPost = () => {
 								flexDirection: 'row',
 								marginTop: '2px',
 							}}>
-							<Accordion>
-								<Card
+							<Form>
+								<Form.Group controlId='exampleForm.ControlTextarea1'>
+									<Form.Label>Enter Description </Form.Label>
+									<Form.Control
+										as='textarea'
+										rows={2}
+										onChange={(event) => {
+											setDescription(event.target.value);
+										}}
+									/>
+								</Form.Group>
+								<div
 									style={{
 										display: 'flex',
-										width: '33rem',
-										height: 'auto',
+										flexDirection: 'Row',
 									}}>
-									<Card.Header
-										style={{
-											display: 'flex',
-											width: 'auto',
-											height: 'auto',
-										}}>
-										<Accordion.Toggle
-											as={Card.Text}
-											eventKey='0'
-											style={{ height: '2rem', width: '8rem' }}>
-											Post image
-										</Accordion.Toggle>
-									</Card.Header>
-									<Accordion.Collapse eventKey='0'>
-										<Card.Body>
-											<Form>
-												<Form.Group controlId='exampleForm.ControlTextarea1'>
-													<Form.Label>Enter Description </Form.Label>
-													<Form.Control
-														as='textarea'
-														rows={3}
-														onChange={(event) => {
-															setDescription(event.target.value);
-														}}
-													/>
-												</Form.Group>
-												<div
-													style={{
-														display: 'flex',
-														flexDirection: 'Row',
-													}}>
-													<Form.Group>
-														{/* <Form.File
+									<Form.Group>
+										{/* <Form.File
 															className='position-relative'
 															required
 															name='file'
@@ -122,65 +102,28 @@ const BoxPost = () => {
 															id='validationFormik107'
 															feedbackTooltip
 														/> */}
-														<Form.File
-															id='exampleFormControlFile1'
-															label='Example file input'
-															onChange={(event) => {
-																setImage(event.target.files);
-															}}
-														/>
-													</Form.Group>
-													<Button
-														onClick={upload}
-														variant='dark'
-														style={{
-															marginLeft: '80px',
-															marginTop: '25px',
-															height: '2rem',
-															width: '4rem',
-														}}>
-														Post
-													</Button>
-												</div>
-											</Form>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-
-								<Card>
-									<Card.Header
+										<Form.File
+											id='exampleFormControlFile1'
+											onChange={(event) => {
+												setImage(event.target.files);
+											}}
+										/>
+									</Form.Group>
+									<Button
+										onClick={upload}
+										variant='success'
+										className='btn-sm'
 										style={{
-											display: 'flex',
-											width: 'auto',
-											height: 'auto',
+											marginLeft: '80px',
+											height: '2rem',
+											width: '4rem',
+											alignItems: 'center',
+											justifyContent: 'center',
 										}}>
-										<Accordion.Toggle
-											as={Card.Text}
-											eventKey='1'
-											style={{ height: '2rem', width: '8rem' }}>
-											Write article
-										</Accordion.Toggle>
-									</Card.Header>
-									<Accordion.Collapse eventKey='1'>
-										<Card.Body>
-											<Form>
-												<Form.Group controlId='exampleForm.ControlTextarea1'>
-													<Form.Label>Enter Description </Form.Label>
-													<Form.Control as='textarea' rows={3} required />
-												</Form.Group>
-												<Button
-													variant='dark'
-													type='submit'
-													style={{
-														marginLeft: '225px',
-													}}>
-													Post
-												</Button>
-											</Form>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
+										Post
+									</Button>
+								</div>
+							</Form>
 						</Card.Body>
 					</Accordion.Collapse>
 				</Card>

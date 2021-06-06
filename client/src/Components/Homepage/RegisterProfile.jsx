@@ -81,7 +81,7 @@ const RegisterProfile = () => {
 					Profile Registration
 				</Card.Header>
 				<Card.Title style={{ marginTop: '8px' }}>
-					Fill the Registration form to create your profile
+					Fill the Registration form to complete your profile
 				</Card.Title>
 				<Card.Body>
 					<Form>
@@ -221,7 +221,9 @@ const RegisterProfile = () => {
 								feedbackTooltip
 							/>
 						</Form.Group> */}
-						<Button onClick={register}>Submit form</Button>
+						<Button variant='success' onClick={register}>
+							Submit form
+						</Button>
 					</Form>
 				</Card.Body>
 			</Card>

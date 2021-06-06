@@ -7,6 +7,7 @@ import EventIcon from '@material-ui/icons/Event';
 const EventForm = () => {
 	const [event_name, setEventName] = useState('');
 	const [venue, setVenue] = useState('');
+	const [event_link, setEventLink] = useState('');
 	const [time, setTime] = useState(null);
 	const [day, setDay] = useState(null);
 	const addEvent = () => {
@@ -15,11 +16,9 @@ const EventForm = () => {
 			venue: venue,
 			time: time,
 			day: day,
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				console.log(response.data);
-			});
+			user_id: localStorage.getItem('email'),
+			event_link: event_link,
+		});
 	};
 	return (
 		<>
@@ -77,6 +76,16 @@ const EventForm = () => {
 										}}
 									/>
 								</Form.Group>
+								<Form.Group controlId='exampleForm.ControlTextarea1'>
+									<Form.Label>Event Link</Form.Label>
+									<Form.Control
+										as='textarea'
+										rows={1}
+										onChange={(e) => {
+											setEventLink(e.target.value);
+										}}
+									/>
+								</Form.Group>
 								<Form.Group>
 									<Row>
 										<Col>
@@ -105,7 +114,7 @@ const EventForm = () => {
 												}}></input>
 										</Col>
 										<Button
-											type='submit'
+											variant='success'
 											style={{
 												marginTop: '15px',
 												display: 'flex',
