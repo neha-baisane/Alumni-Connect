@@ -1,7 +1,0 @@
-{
-    "prettier.jsxBracketSameLine": true,
-    "prettier.jsxSingleQuote": true,
-    "prettier.singleQuote": true,
-    "prettier.useTabs": true,
-    "prettier.vueIndentScriptAndStyle": true
-}
