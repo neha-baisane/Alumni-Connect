@@ -100,7 +100,7 @@ const Events = () => {
 										height: 'auto',
 										display: 'flex',
 										alignItems: 'left',
-										// marginTop: 'auto',
+									
 										backgroundColor: '',
 									}}>
 									<Row>

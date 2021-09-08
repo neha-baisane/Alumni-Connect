@@ -31,16 +31,11 @@ const Gallery = () => {
 									cloudName='sakshi-mini-project'
 									publicId={value.photo_name}
 								/>
-								{/* <Carousel.Caption>
-									<h4>{value.user_name}</h4>
-								</Carousel.Caption> */}
+					
 								<figcaption>
 									<h5 className='font-italic'>Image By : {value.user_name}</h5>
 								</figcaption>
-								{/* <OverlayTrigger
-										overlay={
-											<Tooltip id='button-tooltip-2'>{value.user_name}</Tooltip>
-										}></OverlayTrigger> */}
+								
 							</Carousel.Item>
 						);
 					})}

@@ -94,14 +94,7 @@ const BoxPost = () => {
 										flexDirection: 'Row',
 									}}>
 									<Form.Group>
-										{/* <Form.File
-															className='position-relative'
-															required
-															name='file'
-															label='Upload photo'
-															id='validationFormik107'
-															feedbackTooltip
-														/> */}
+									
 										<Form.File
 											id='exampleFormControlFile1'
 											onChange={(event) => {

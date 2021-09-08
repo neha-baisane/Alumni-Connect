@@ -48,14 +48,7 @@ function PostCard() {
 
 	const showComments = () => {
 		setShowComment(!showComment);
-		// axios.get('http://localhost:3001/comment').then((response) => {
-		// 	if (response.data.message) {
-		// 		setErrorMessage(response.data.message);
-		// 	} else {
-		// 		setComments(response.data);
-		// 		console.log(response.data);
-		// 	}
-		// });
+		
 	};
 	const deletePost = () => {
 		axios
@@ -78,22 +71,7 @@ function PostCard() {
 				setUploads(response.data);
 			}
 		});
-		// axios.get('http://localhost:3001/comment').then((response) => {
-		// 	if (response.data.message) {
-		// 		setErrorMessage(response.data.message);
-		// 	} else {
-		// 		setComments(response.data);
-		// 		console.log(response.data);
-		// 	}
-		// });
-		// axios.get(`http://localhost:3001/comment/${postId}`).then((response) => {
-		// 	if (response.data.message) {
-		// 		setErrorMessage(response.data.message);
-		// 	} else {
-		// 		setComments(response.data);
-		// 		console.log(response.data);
-		// 	}
-		// });
+		
 	});
 
 	return (
@@ -119,11 +97,7 @@ function PostCard() {
 									display: 'flex',
 									flexDirection: 'row',
 								}}>
-								{/* <Avatar
-									alt={value.user_name}
-									style={{ marginRight: '8px' }}
-									src='/static/images/avatar/1.jpg'
-								/> */}
+							
 								<Card.Title style={{ marginTop: '8px' }}>
 									{value.user_name}
 								</Card.Title>{' '}
@@ -150,43 +124,8 @@ function PostCard() {
 								<Card.Text>
 									<b>{value.user_name} </b> : {value.description}
 								</Card.Text>
-								{/* <Card.Text className='mb-2 text-muted'>
-									<Button variant='light' onClick={showComments}>
-										<AddCommentIcon
-											style={{ marginRight: '8px', colour: 'grey' }}
-										/>
-										Comments
-									</Button>
-								</Card.Text> */}
-								{/* {showComment && (
-									<>
-										{comments.map((v, k) => {
-											return postId == v.post_id ? (
-												<Card
-													body
-													key={k}
-													className='h-auto d-inline-block w-100'>
-													{v.email} : {v.text}
-												</Card>
-											) : null;
-										})}
-										<InputGroup className='mb-3'>
-											<FormControl
-												placeholder="What's in your mind?"
-												aria-label="What's in your mind?"
-												aria-describedby='basic-addon2'
-												onChange={(event) => {
-													setText(event.target.value);
-												}}
-											/>
-											<InputGroup.Append>
-												<Button variant='success' onClick={postComment}>
-													Post
-												</Button>
-											</InputGroup.Append>
-										</InputGroup>
-									</>
-								)} */}
+								
+							
 							</Card.Body>
 						</Card>
 					</div>
